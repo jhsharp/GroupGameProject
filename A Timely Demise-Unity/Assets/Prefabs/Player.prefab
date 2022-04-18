@@ -149,7 +149,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   moveSpeed: 4
-  jumpSpeed: 7
+  jumpSpeed: 9
   deathDelay: 1
   health: 1
 --- !u!95 &2147716554511984015
