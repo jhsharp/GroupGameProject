@@ -19,11 +19,14 @@ public class Button : MonoBehaviour
     public bool isPressed; //is something pressing the button?
     public string playerTag; //the tag used by the player
     public string playerMimicTag; //the tag used by the player copies.
+    public GameObject connectedDoor; //the door associated with this button.
+    private Door unlockMech;
 
     // Start is called before the first frame update
     void Start()
     {
-        isPressed = false;  
+        isPressed = false;
+        unlockMech = connectedDoor.GetComponent<Door>();
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -33,6 +36,7 @@ public class Button : MonoBehaviour
         {
             isPressed = true;
             Debug.Log("Button pressed by " + collision.gameObject.tag);
+            unlockMech.UnlockDoor();
         }
         else
         {
@@ -47,6 +51,7 @@ public class Button : MonoBehaviour
         {
             isPressed = false;
             Debug.Log("Button left by " + collision.gameObject.tag);
+            unlockMech.LockDoor();
         }
         else
         {
