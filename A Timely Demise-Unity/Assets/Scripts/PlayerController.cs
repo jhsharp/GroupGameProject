@@ -76,14 +76,14 @@ public class PlayerController : MonoBehaviour
         // Check for wall collisions
         if (collideWalls()) transform.position -= moveChange;
         // Animation
-        // if (moveInput != 0) animator.SetBool("Walk", true);
-        // else animator.SetBool("Walk", false);
+        if (moveInput != 0) animator.SetBool("Walk", true);
+        else animator.SetBool("Walk", false);
         // Sprite Flip
-        if (moveInput < 0)
+        if (moveInput > 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if (moveInput > 0)
+        else if (moveInput < 0)
         {
             spriteRenderer.flipX = false;
         }
