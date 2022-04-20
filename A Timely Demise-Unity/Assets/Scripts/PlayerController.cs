@@ -15,8 +15,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     // references to components
-    private Rigidbody2D rb;
-    private Collider2D col;
+    private Rigidbody rb;
+    private Collider col;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     public LayerMask ground;
@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         // get player components
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -73,8 +73,8 @@ public class PlayerController : MonoBehaviour
         moveChange = Vector3.zero;
         moveChange.x = moveInput * moveSpeed * Time.deltaTime;
         transform.position += moveChange;
-        // Check for wall collisions
-        if (collideWalls()) transform.position -= moveChange;
+        // Check for wall collisions (not needed with new rigidbodies)
+        // if (collideWalls()) transform.position -= moveChange;
         // Animation
         if (moveInput != 0) animator.SetBool("Walk", true);
         else animator.SetBool("Walk", false);
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         // jump if the player is on the ground and presses w/space
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded() && !deathActive)
         {
-            rb.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
+            rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
             // animator.SetTrigger("Jump");
         }
     }
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
             // animator.SetTrigger("Dead");
             deathDelayTimer = deathDelay;
             deathActive = true;
-            rb.gravityScale = 5;
         }
 
     }
