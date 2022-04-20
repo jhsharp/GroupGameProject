@@ -3,7 +3,7 @@
  * Creation Date: April 18 2022
  * 
  * Updated by: Ava Fritts
- * Updated Date: April 18 2022
+ * Updated Date: April 20 2022
  * 
  * Description: The base script for all the buttons in the game
  **/
@@ -34,28 +34,28 @@ public class Button : MonoBehaviour
         string colGo = collision.gameObject.tag; //getting the tag from the collision
         if(colGo.Equals(playerTag) || colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
         {
-            isPressed = true;
-            Debug.Log("Button pressed by " + collision.gameObject.tag);
-            unlockMech.UnlockDoor();
+            isPressed = true; //tell the game the button has been pressed
+            Debug.Log("Button pressed by " + collision.gameObject.tag); //who pressed the button?
+            unlockMech.UnlockDoor(); //unlock the connected door
         }
         else
         {
             Debug.Log("Not a player object");
         }
-    } //end OnCollisionEnter
+    } //end OnCollisionEnter2D
 
     public void OnCollisionExit(Collision collision) 
     {
         string colGo = collision.gameObject.tag;
         if (colGo.Equals(playerTag) || colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
         {
-            isPressed = false;
-            Debug.Log("Button left by " + collision.gameObject.tag);
-            unlockMech.LockDoor();
+            isPressed = false; //tell the game the button is not pressed
+            Debug.Log("Button left by " + collision.gameObject.tag); //who left the button?
+            unlockMech.LockDoor(); //lock the door
         }
         else
         {
             Debug.Log("Not a player object");
         }
-    } //end OnCollisionExit
+    } //end OnCollisionExit2D
 }
