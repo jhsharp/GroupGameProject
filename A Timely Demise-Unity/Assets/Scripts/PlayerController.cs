@@ -102,18 +102,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded()
     {
         // return whether the player is on the ground
-        Vector2 topLeft = transform.position;
-        topLeft.x -= col.bounds.extents.x;
-        topLeft.y += col.bounds.extents.y;
-
-        Vector2 bottomRight = transform.position;
-        bottomRight.x += col.bounds.extents.x;
-        bottomRight.y -= col.bounds.extents.y;
-
-        return (Physics2D.OverlapArea(topLeft, bottomRight, ground));
+        return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y);
     }
 
-    private bool collideWalls()
+    private bool collideWalls() // OUTDATED
     {
         // return whether the player is colliding with walls
         Vector2 topLeft = transform.position;
