@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask ground;
 
     // variables for timings/movement
+    public bool currentlyGrounded;
     private float moveInput;
     private Vector3 moveChange;
     [SerializeField] private float moveSpeed, jumpSpeed;
@@ -104,9 +105,10 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded()
     {
         // return whether the player is on the ground
-        return (Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.05f)
+        currentlyGrounded = (Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.05f)
             || Physics.Raycast(transform.position - new Vector3(col.bounds.extents.x, 0, 0), Vector3.down, col.bounds.extents.y + 0.05f) 
             || Physics.Raycast(transform.position + new Vector3(col.bounds.extents.x, 0, 0), Vector3.down, col.bounds.extents.y + 0.05f));
+        return currentlyGrounded;
     }
 
     private bool collideWalls() // OUTDATED
