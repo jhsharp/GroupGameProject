@@ -30,12 +30,12 @@ public class TimeRecorder : MonoBehaviour
     public List<Vector3> positionList = new List<Vector3>();
 
     // reference to game component
-    private Rigidbody2D rb;
+    private Rigidbody rb;
 
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
