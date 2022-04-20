@@ -79,7 +79,8 @@ public class TimeRecorder : MonoBehaviour
         if (replayTime < positionList.Count)
         {
             // transform.position = positionList[replayTime];
-            transform.position += positionList[replayTime] - positionList[replayTime - 1];
+            if (replayTime == 0) transform.position = positionList[replayTime];
+            else transform.position += positionList[replayTime] - positionList[replayTime - 1];
             replayTime++;
         }
 
@@ -93,7 +94,8 @@ public class TimeRecorder : MonoBehaviour
         isReplaying = true;
         replayTime = 0;
         recordTimer = 0;
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
+        rb.useGravity = false;
         transform.position = positionList[0];
     }
 }
