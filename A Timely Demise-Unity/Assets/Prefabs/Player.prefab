@@ -131,7 +131,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 4
+  currentlyGrounded: 0
+  moveInput: 0
+  jumpInput: 0
+  moveSpeed: 6
   jumpSpeed: 16
   deathDelay: 1
   health: 1

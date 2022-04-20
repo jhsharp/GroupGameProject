@@ -24,7 +24,8 @@ public class PlayerController : MonoBehaviour
 
     // variables for timings/movement
     public bool currentlyGrounded;
-    private float moveInput;
+    [HideInInspector] public float moveInput;
+    [HideInInspector] public bool jumpInput;
     private Vector3 moveChange;
     [SerializeField] private float moveSpeed, jumpSpeed;
     [SerializeField] private float deathDelay;
@@ -53,7 +54,14 @@ public class PlayerController : MonoBehaviour
         // controls.Player.Quit.performed += _ => gameMan.quitGame();
     }
 
-    void Update()
+    private void Update()
+    {
+        // Read input
+        moveInput = Input.GetAxis("Horizontal");
+        if (!jumpInput) jumpInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+    }
+
+    void FixedUpdate()
     {
         // manage movement when the player isn't dead
         if (!deathActive || !recorder.isReplaying)
@@ -70,11 +78,9 @@ public class PlayerController : MonoBehaviour
 
     private void move()
     {
-        // Read input
-        moveInput = Input.GetAxis("Horizontal");
         // Move the player
         moveChange = Vector3.zero;
-        moveChange.x = moveInput * moveSpeed * Time.deltaTime;
+        moveChange.x = moveInput * moveSpeed * Time.fixedDeltaTime;
         transform.position += moveChange;
         // Check for wall collisions (not needed with new rigidbodies)
         // if (collideWalls()) transform.position -= moveChange;
@@ -95,8 +101,9 @@ public class PlayerController : MonoBehaviour
     private void jump()
     {
         // jump if the player is on the ground and presses w/space
-        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) && isGrounded() && !deathActive)
+        if (jumpInput && isGrounded() && !deathActive)
         {
+            jumpInput = false;
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
             // animator.SetTrigger("Jump");
         }
@@ -146,7 +153,7 @@ public class PlayerController : MonoBehaviour
         // continue player death process and reset room if timer is up
         if (deathActive)
         {
-            if (deathDelayTimer > 0) deathDelayTimer -= Time.deltaTime;
+            if (deathDelayTimer > 0) deathDelayTimer -= Time.fixedDeltaTime;
             else Debug.Log("ADD ROOM RESET ON DEATH"); // gameMan.loadScene(SceneManager.GetActiveScene().name);
         }
     }
