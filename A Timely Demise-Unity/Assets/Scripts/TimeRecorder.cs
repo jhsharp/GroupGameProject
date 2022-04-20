@@ -3,7 +3,7 @@
  * Date Created: April 18, 2022
  * 
  * Last Edited By: Jacob Sharp
- * Date Last Edited: April 18, 2022
+ * Date Last Edited: April 19, 2022
  * 
  * Description: Record the positions of an object and play it back later
  ****/
@@ -16,23 +16,82 @@ using UnityEngine;
 public class TimeRecorder : MonoBehaviour
 {
     // booleans to determine behavior
-    public bool record = true;
-    public bool playback = false;
+    public bool isRecording = true;
+    public bool isReplaying = false;
 
     // frames between each recorded position
-    public int recordSpacing = 5;
+    public int recordSpacing = 0;
     private int recordTimer = 0;
+
+    // current time in replay process
+    private int replayTime;
 
     // list to store positions in
     public List<Vector3> positionList = new List<Vector3>();
 
-    void Start()
+    // reference to game component
+    private Rigidbody2D rb;
+
+
+    private void Start()
     {
-        Invoke("RecordPosition", 0);
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    private void RecordPosition()
+    private void Update()
     {
-        positionList.Add(gameObject.transform.position);
+        // manually start replaying
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            startReplay();
+            Debug.Log("Starting Replay");
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // manage recording behavior
+        if (isRecording)
+        {
+            if (recordTimer <= 0)
+            {
+                recordPosition();
+                recordTimer = recordSpacing;
+            }
+            else recordTimer--;
+        }
+
+        // manage replaying behavior
+        else if (isReplaying)
+        {
+            replayPosition(); // NEED TO ADD INTERPOLATION BETWEEN POINTS
+        }
+    }
+
+    private void recordPosition()
+    {
+        positionList.Add(transform.position);
+    }
+
+    private void replayPosition()
+    {
+        // replay positions from the list
+        if (replayTime < positionList.Count)
+        {
+            transform.position = positionList[replayTime];
+            replayTime++;
+        }
+
+        // if recording is ended, stop replaying
+        else isReplaying = false;
+    }
+
+    public void startReplay()
+    {
+        isRecording = false;
+        isReplaying = true;
+        replayTime = 0;
+        recordTimer = 0;
+        rb.isKinematic = true;
     }
 }
