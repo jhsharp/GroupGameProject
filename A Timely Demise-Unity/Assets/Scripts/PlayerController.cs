@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Collider col;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private TimeRecorder recorder;
     public LayerMask ground;
 
     // variables for timings/movement
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        recorder = GetComponent<TimeRecorder>();
 
         // gameMan = FindObjectOfType<GameManager>();
     }
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // manage movement when the player isn't dead
-        if (!deathActive)
+        if (!deathActive || !recorder.isReplaying)
         {
             move();
             jump();
@@ -102,7 +104,9 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded()
     {
         // return whether the player is on the ground
-        return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y);
+        return (Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.05f)
+            || Physics.Raycast(transform.position - new Vector3(col.bounds.extents.x, 0, 0), Vector3.down, col.bounds.extents.y + 0.05f) 
+            || Physics.Raycast(transform.position + new Vector3(col.bounds.extents.x, 0, 0), Vector3.down, col.bounds.extents.y + 0.05f));
     }
 
     private bool collideWalls() // OUTDATED
