@@ -29,7 +29,9 @@ public class TimeRecorder : MonoBehaviour
     // list to store inputs and variables for input/position
     private List<InputSet> inputList = new List<InputSet>();
     private Vector3 initialPosition;
-    private bool hasJumped = false;
+
+    // static list to store all clone bodies
+    private static List<TimeRecorder> bodyList = new List<TimeRecorder>();
 
     // reference to game component
     private Rigidbody rb;
@@ -38,19 +40,25 @@ public class TimeRecorder : MonoBehaviour
 
     private void Start()
     {
+        // get references to components
         rb = GetComponent<Rigidbody>();
         player = GetComponent<PlayerController>();
+
+        // add self to global list of bodies
+        bodyList.Add(this);
+
+        // start recording the player
         if (isRecording) startRecord();
     }
 
     private void Update()
     {
-        // manually start replaying
-        if (Input.GetKeyDown(KeyCode.Return))
+        // manually start replaying (for testing purposes)
+        /*if (Input.GetKeyDown(KeyCode.Return))
         {
             startReplay();
             Debug.Log("Starting Replay");
-        }
+        }*/
     }
 
     void FixedUpdate()
@@ -69,12 +77,13 @@ public class TimeRecorder : MonoBehaviour
         // manage replaying behavior
         else if (isReplaying)
         {
-            replayPosition(); // NEED TO ADD INTERPOLATION BETWEEN POINTS
+            replayPosition();
         }
     }
 
     private void recordInput()
     {
+        // record the move and jump input from the player
         InputSet nextInput = new InputSet(player.moveInput, player.hasJumped);
         if (player.hasJumped) player.hasJumped = false;
         inputList.Add(nextInput);
@@ -109,22 +118,37 @@ public class TimeRecorder : MonoBehaviour
 
     public void startRecord()
     {
+        // reset variables to start recording
         isRecording = true;
         isReplaying = false;
         player.controlsEnabled = true;
         inputList.Clear();
+
+        // mark initial position of player
         initialPosition = transform.position;
 
     }
 
     public void startReplay()
     {
+        // reset variables to start replaying
         isRecording = false;
         isReplaying = true;
         player.controlsEnabled = false;
         replayIndex = -1;
         recordTimer = 0;
+
+        // move clone to original position
         transform.position = initialPosition;
+    }
+
+    public static void globalReplay()
+    {
+        // make all existing clones restart the replay process
+        foreach (TimeRecorder recorder in bodyList)
+        {
+            recorder.startReplay();
+        }
     }
 
     public struct InputSet

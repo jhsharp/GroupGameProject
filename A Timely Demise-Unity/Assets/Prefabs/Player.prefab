@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 9100947534287931814, guid: 23346c74f00ae914da03dac48b80dcba, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8392157, g: 0.88235295, b: 0.94509804, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,11 +131,13 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  currentlyGrounded: 0
   moveInput: 0
   jumpInput: 0
+  hasJumped: 0
+  controlsEnabled: 1
   moveSpeed: 6
-  jumpSpeed: 16
+  jumpSpeed: 45
+  currentlyGrounded: 0
   deathDelay: 1
   health: 1
 --- !u!95 &2147716554511984015
@@ -171,5 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRecording: 1
   isReplaying: 0
-  recordSpacing: 0
-  positionList: []
+  recordSpacing: 2

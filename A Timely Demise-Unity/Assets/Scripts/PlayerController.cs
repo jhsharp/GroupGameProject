@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         // Move the player
         moveChange = Vector3.zero;
         moveChange.x = moveInput * moveSpeed * Time.fixedDeltaTime;
-        if (moveChange.x != 0 && rb.SweepTest(Vector3.right * Mathf.Sign(moveChange.x), out RaycastHit hit, Mathf.Abs(moveChange.x))) // check for wall collisions
+        if (moveChange.x != 0 && rb.SweepTest(Vector3.right * Mathf.Sign(moveChange.x), out RaycastHit hit, Mathf.Abs(moveChange.x), QueryTriggerInteraction.Ignore)) // check for wall collisions
         {
             moveChange = Vector3.zero;
         }
