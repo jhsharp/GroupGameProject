@@ -90,12 +90,12 @@ public class TimeRecorder : MonoBehaviour
         }
         else recordTimer--; // otherwise keep counting towards the next recorded input time
 
-        // replay positions from the list
+        // replay inputs from the list
         if (replayIndex < inputList.Count)
         {
             InputSet input = inputList[replayIndex];
             player.moveInput = input.move;
-            player.jumpInput = input.jump;
+            if (recordTimer == recordSpacing) player.jumpInput = input.jump; // only jump on the first jump frame
         }
         // if recording is ended, stop replaying
         else

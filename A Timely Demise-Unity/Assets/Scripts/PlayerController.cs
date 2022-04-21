@@ -90,12 +90,16 @@ public class PlayerController : MonoBehaviour
         // Move the player
         moveChange = Vector3.zero;
         moveChange.x = moveInput * moveSpeed * Time.fixedDeltaTime;
+        if (moveChange.x != 0 && rb.SweepTest(Vector3.right * Mathf.Sign(moveChange.x), out RaycastHit hit, Mathf.Abs(moveChange.x))) // check for wall collisions
+        {
+            moveChange = Vector3.zero;
+        }
         transform.position += moveChange;
-        // Check for wall collisions (not needed with new rigidbodies)
-        // if (collideWalls()) transform.position -= moveChange;
+
         // Animation
         if (moveInput != 0) animator.SetBool("Walk", true);
         else animator.SetBool("Walk", false);
+
         // Sprite Flip
         if (moveInput > 0)
         {
