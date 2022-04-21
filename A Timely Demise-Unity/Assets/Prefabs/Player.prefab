@@ -174,3 +174,5 @@ MonoBehaviour:
   isRecording: 1
   isReplaying: 0
   recordSpacing: 2
+  playerColor: {r: 0, g: 0.08274828, b: 0.8584906, a: 1}
+  cloneColor: {r: 1, g: 0, b: 0, a: 1}

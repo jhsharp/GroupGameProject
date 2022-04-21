@@ -33,8 +33,13 @@ public class TimeRecorder : MonoBehaviour
     // static list to store all clone bodies
     private static List<TimeRecorder> bodyList = new List<TimeRecorder>();
 
+    // colors for player and clone
+    public Color playerColor;
+    public Color cloneColor;
+
     // reference to game component
     private Rigidbody rb;
+    private SpriteRenderer renderer;
     private PlayerController player;
 
 
@@ -42,6 +47,7 @@ public class TimeRecorder : MonoBehaviour
     {
         // get references to components
         rb = GetComponent<Rigidbody>();
+        renderer = GetComponent<SpriteRenderer>();
         player = GetComponent<PlayerController>();
 
         // add self to global list of bodies
@@ -124,6 +130,9 @@ public class TimeRecorder : MonoBehaviour
         player.controlsEnabled = true;
         inputList.Clear();
 
+        // set color to player color
+        renderer.color = playerColor;
+
         // mark initial position of player
         initialPosition = transform.position;
 
@@ -137,6 +146,9 @@ public class TimeRecorder : MonoBehaviour
         player.controlsEnabled = false;
         replayIndex = -1;
         recordTimer = 0;
+
+        // set color to clone color
+        renderer.color = cloneColor;
 
         // move clone to original position
         transform.position = initialPosition;
