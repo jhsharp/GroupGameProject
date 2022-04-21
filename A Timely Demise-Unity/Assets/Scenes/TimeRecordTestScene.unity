@@ -803,6 +803,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5266049071491232716, guid: c8039a094043d1743aecd1d9cb39dd36, type: 3}
+      propertyPath: recordSpacing
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5533791691586949320, guid: c8039a094043d1743aecd1d9cb39dd36, type: 3}
       propertyPath: m_Constraints
       value: 4

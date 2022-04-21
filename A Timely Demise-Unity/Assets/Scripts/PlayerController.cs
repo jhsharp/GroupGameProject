@@ -22,12 +22,17 @@ public class PlayerController : MonoBehaviour
     private TimeRecorder recorder;
     public LayerMask ground;
 
-    // variables for timings/movement
-    public bool currentlyGrounded;
+    // variables for input
     [HideInInspector] public float moveInput;
-    [HideInInspector] public bool jumpInput;
+    [HideInInspector] public bool jumpInput, hasJumped;
+    [HideInInspector] public bool controlsEnabled = true;
+
+    // variables for movement
     private Vector3 moveChange;
     [SerializeField] private float moveSpeed, jumpSpeed;
+    public bool currentlyGrounded;
+
+    // variables for managing death
     [SerializeField] private float deathDelay;
     private float deathDelayTimer;
     private bool deathActive = false;
@@ -56,15 +61,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Read input
-        moveInput = Input.GetAxis("Horizontal");
-        if (!jumpInput) jumpInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+        // Read input if controls are enabled
+        if (controlsEnabled)
+        {
+            moveInput = Input.GetAxis("Horizontal");
+            if (!jumpInput) jumpInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
+            if (!hasJumped) hasJumped = jumpInput; // used for time recorder
+        }
     }
 
     void FixedUpdate()
     {
         // manage movement when the player isn't dead
-        if (!deathActive || !recorder.isReplaying)
+        if (!deathActive)
         {
             move();
             jump();

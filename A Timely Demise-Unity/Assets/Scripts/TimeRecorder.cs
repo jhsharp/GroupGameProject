@@ -24,18 +24,23 @@ public class TimeRecorder : MonoBehaviour
     private int recordTimer = 0;
 
     // current time in replay process
-    private int replayTime;
+    private int replayIndex;
 
-    // list to store positions in
-    public List<Vector3> positionList = new List<Vector3>();
+    // list to store inputs and variables for input/position
+    private List<InputSet> inputList = new List<InputSet>();
+    private Vector3 initialPosition;
+    private bool hasJumped = false;
 
     // reference to game component
     private Rigidbody rb;
+    private PlayerController player;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GetComponent<PlayerController>();
+        if (isRecording) startRecord();
     }
 
     private void Update()
@@ -55,7 +60,7 @@ public class TimeRecorder : MonoBehaviour
         {
             if (recordTimer <= 0)
             {
-                recordPosition();
+                recordInput();
                 recordTimer = recordSpacing;
             }
             else recordTimer--;
@@ -68,34 +73,70 @@ public class TimeRecorder : MonoBehaviour
         }
     }
 
-    private void recordPosition()
+    private void recordInput()
     {
-        positionList.Add(transform.position);
+        InputSet nextInput = new InputSet(player.moveInput, player.hasJumped);
+        if (player.hasJumped) player.hasJumped = false;
+        inputList.Add(nextInput);
     }
 
     private void replayPosition()
     {
-        // replay positions from the list
-        if (replayTime < positionList.Count)
+        // increment the replay index if a new recorded input is available
+        if (recordTimer == 0)
         {
-            // transform.position = positionList[replayTime];
-            if (replayTime == 0) transform.position = positionList[replayTime];
-            else transform.position += positionList[replayTime] - positionList[replayTime - 1];
-            replayTime++;
+            recordTimer = recordSpacing;
+            replayIndex++;
+        }
+        else recordTimer--; // otherwise keep counting towards the next recorded input time
+
+        // replay positions from the list
+        if (replayIndex < inputList.Count)
+        {
+            InputSet input = inputList[replayIndex];
+            player.moveInput = input.move;
+            player.jumpInput = input.jump;
+        }
+        // if recording is ended, stop replaying
+        else
+        {
+            isReplaying = false;
+            player.moveInput = 0;
+            player.jumpInput = false;
         }
 
-        // if recording is ended, stop replaying
-        else isReplaying = false;
+    }
+
+    public void startRecord()
+    {
+        isRecording = true;
+        isReplaying = false;
+        player.controlsEnabled = true;
+        inputList.Clear();
+        initialPosition = transform.position;
+
     }
 
     public void startReplay()
     {
         isRecording = false;
         isReplaying = true;
-        replayTime = 0;
+        player.controlsEnabled = false;
+        replayIndex = -1;
         recordTimer = 0;
-        //rb.isKinematic = true;
-        rb.useGravity = false;
-        transform.position = positionList[0];
+        transform.position = initialPosition;
+    }
+
+    public struct InputSet
+    {
+        // a struct used to contain all of the input from player
+        public float move;
+        public bool jump;
+
+        public InputSet(float moveInput, bool jumpInput)
+        {
+            move = moveInput;
+            jump = jumpInput;
+        }
     }
 }
