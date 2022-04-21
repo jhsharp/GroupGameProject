@@ -17,8 +17,9 @@ public class Button : MonoBehaviour
     /**Variables**/
     [Header("Button settings")]
     public bool isPressed; //is something pressing the button?
+    public LayerMask playerCharacters; //the layer used by the characters
     public string playerTag; //the tag used by the player
-    public string playerMimicTag; //the tag used by the player copies.
+    //public string playerMimicTag; //the tag used by the player copies.
     public GameObject connectedDoor; //the door associated with this button.
     private Door unlockMech;
 
@@ -32,7 +33,7 @@ public class Button : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         string colGo = collision.gameObject.tag; //getting the tag from the collision
-        if(colGo.Equals(playerTag) || colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
+        if (colGo.Equals(playerTag))  //|| colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
         {
             isPressed = true; //tell the game the button has been pressed
             Debug.Log("Button pressed by " + collision.gameObject.tag); //who pressed the button?
@@ -40,14 +41,14 @@ public class Button : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not a player object");
+            Debug.Log("Not a player object: "+ colGo);
         }
-    } //end OnCollisionEnter2D
+    } //end OnCollisionEnter
 
-    public void OnCollisionExit(Collision collision) 
+    public void OnCollisionExit(Collision collision)
     {
-        string colGo = collision.gameObject.tag;
-        if (colGo.Equals(playerTag) || colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
+        string colGo = collision.gameObject.tag; //getting the tag from the collision
+        if (colGo.Equals(playerTag)) //|| colGo.Equals(playerMimicTag)) //if the tag matches the tag of the player characters
         {
             isPressed = false; //tell the game the button is not pressed
             Debug.Log("Button left by " + collision.gameObject.tag); //who left the button?
@@ -57,5 +58,5 @@ public class Button : MonoBehaviour
         {
             Debug.Log("Not a player object");
         }
-    } //end OnCollisionExit2D
+    } //end OnCollisionExit
 }
