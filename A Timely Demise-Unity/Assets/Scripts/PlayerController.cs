@@ -3,7 +3,7 @@
  * Date Created: April 18, 2022
  * 
  * Last Edited By: Jacob Sharp
- * Date Last Edited: April 18, 2022
+ * Date Last Edited: April 24, 2022
  * 
  * Description: Manage player movement/interactions
  ****/
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int health; // player health
 
-    // public GameManager gameMan;
+    private GameManager gameMan;
 
 
     private void Awake()
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         recorder = GetComponent<TimeRecorder>();
 
-        // gameMan = FindObjectOfType<GameManager>();
+        gameMan = FindObjectOfType<GameManager>();
     }
 
     void Start()
@@ -67,6 +67,9 @@ public class PlayerController : MonoBehaviour
             moveInput = Input.GetAxis("Horizontal");
             if (!jumpInput) jumpInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
             if (!hasJumped) hasJumped = jumpInput; // used for time recorder
+
+            // restart if R is pressed
+            if (Input.GetKey(KeyCode.R)) gameMan.RestartLevel();
         }
     }
 
@@ -167,7 +170,7 @@ public class PlayerController : MonoBehaviour
         if (deathActive)
         {
             if (deathDelayTimer > 0) deathDelayTimer -= Time.fixedDeltaTime;
-            else Debug.Log("ADD ROOM RESET ON DEATH"); // gameMan.loadScene(SceneManager.GetActiveScene().name);
+            gameMan.RestartLevel();
         }
     }
 }
