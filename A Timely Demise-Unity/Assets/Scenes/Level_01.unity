@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -283,10 +283,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2226048695183360577, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1564651691}
     - target: {fileID: 8303727053838692170, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -899,10 +895,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2226048695183360577, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1564651691}
     - target: {fileID: 8303727053838692170, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -1105,11 +1097,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 916689184940d9e429b897a1208855d4, type: 3}
---- !u!1 &1564651691 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 101656933977134071, guid: 916689184940d9e429b897a1208855d4, type: 3}
-  m_PrefabInstance: {fileID: 1564651690}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1605363623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,10 +1422,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2226048695183360577, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1564651691}
     - target: {fileID: 8303727053838692170, guid: 62324b15c7e5bd14381225c9574a7f8a, type: 3}
       propertyPath: m_RootOrder
       value: 14
