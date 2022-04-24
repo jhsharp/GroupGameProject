@@ -19,7 +19,7 @@ public class Goal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // When the trigger is hit by something
-        // Check to see if it's a Man
+        // Check to see if it's a Player
         if (other.gameObject.tag == "Player")
         {
             // If so, set goalMet to true
