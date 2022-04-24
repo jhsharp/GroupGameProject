@@ -325,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287782432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -16, z: 0}
+  m_LocalPosition: {x: 100, y: -16, z: 0}
   m_LocalScale: {x: 38, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -565,7 +565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439592179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -16, z: 0}
+  m_LocalPosition: {x: 100, y: -16, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children:
   - {fileID: 348543729}
@@ -972,7 +972,6 @@ MonoBehaviour:
   - Level_01
   - Level_02
   gameLevelsCount: 0
-  TestGameManager: 0
   levelLost: 0
   nextLevel: 0
   playerWon: 0

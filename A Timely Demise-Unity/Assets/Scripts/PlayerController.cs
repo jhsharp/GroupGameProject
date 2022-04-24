@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveChange;
     [SerializeField] private float moveSpeed, jumpSpeed;
     public bool currentlyGrounded;
+    public int lowerBound = -40;
 
     // variables for managing death
     [SerializeField] private float deathDelay;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             move();
             jump();
+            checkBounds();
         }
 
         // check to see if the player is dead/dying
@@ -146,6 +148,12 @@ public class PlayerController : MonoBehaviour
         bottomRight.y -= col.bounds.extents.y - 0.1f;
 
         return Physics2D.OverlapArea(topLeft, bottomRight, ground);
+    }
+
+    private void checkBounds()
+    {
+        // restart the room when the player falls off the level
+        if (transform.position.y < lowerBound) gameMan.RestartLevel();
     }
 
     public void takeDamage(int damage)
