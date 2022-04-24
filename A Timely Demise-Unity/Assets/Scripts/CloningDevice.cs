@@ -3,7 +3,7 @@
  * Date Created: April 20, 2022
  * 
  * Last Edited By: Jacob Sharp
- * Date Last Edited: April 20, 2022
+ * Date Last Edited: April 24, 2022
  * 
  * Description: Create a clone of the player when activated
  ****/
@@ -25,7 +25,16 @@ public class CloningDevice : MonoBehaviour
     void Start()
     {
         // Activate the player if this is the starting point of the level
-        if (activated) player.SetActive(true);
+        if (activated)
+        {
+            player.SetActive(true);
+        }
+    }
+
+    private void OnEnable()
+    {
+        // reset the body list when a scene first loads
+        TimeRecorder.resetBodyList();
     }
 
     private void OnTriggerEnter(Collider col)

@@ -31,7 +31,7 @@ public class TimeRecorder : MonoBehaviour
     private Vector3 initialPosition;
 
     // static list to store all clone bodies
-    private static List<TimeRecorder> bodyList = new List<TimeRecorder>();
+    public static List<TimeRecorder> bodyList;
 
     // colors for player and clone
     public Color playerColor;
@@ -51,6 +51,7 @@ public class TimeRecorder : MonoBehaviour
         player = GetComponent<PlayerController>();
 
         // add self to global list of bodies
+        if (bodyList == null) resetBodyList();
         bodyList.Add(this);
 
         // start recording the player
@@ -161,6 +162,12 @@ public class TimeRecorder : MonoBehaviour
         {
             recorder.startReplay();
         }
+    }
+
+    public static void resetBodyList()
+    {
+        // reset the body list to be empty
+        bodyList = new List<TimeRecorder>();
     }
 
     public struct InputSet
