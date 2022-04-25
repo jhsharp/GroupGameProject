@@ -175,6 +175,17 @@ public class GameManager : MonoBehaviour
 
     }//end StartGame()
 
+    public void LoadGame()
+    {
+        if (!PlayerPrefs.HasKey("Current Level")) StartGame(); // if there is no save data, start a new game
+        else // otherwise, load the stored level
+        {
+            SetDefaultGameStats(); // the game stats defaults 
+            gameLevelsCount = PlayerPrefs.GetInt("Current Level") - 1; // set level
+            NextLevel();
+        }
+    }
+
 
     public void SetDefaultGameStats()
     {
@@ -222,6 +233,7 @@ public class GameManager : MonoBehaviour
         {
             gameLevelsCount++; //add to level count for next level
             loadLevel = gameLevelsCount - 1; //find the next level in the array
+            PlayerPrefs.SetInt("Current Level", gameLevelsCount); // update save data
             SceneManager.LoadScene(gameLevels[loadLevel]); //load next level
             SetGameState(GameState.Playing);//set the game state to playing
 
