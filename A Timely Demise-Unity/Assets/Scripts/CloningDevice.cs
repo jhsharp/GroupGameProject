@@ -21,13 +21,20 @@ public class CloningDevice : MonoBehaviour
     [Header("ONLY FOR PREFAB SETTINGS:")]
     [Tooltip("Make sure this player is set to inactive in the editor")]
     public GameObject player; // reference to the player associated with this device
+    public Material activatedMat;
+
+    private Renderer renderer;
 
     void Start()
     {
+        // Get a reference to the renderer
+        renderer = GetComponent<Renderer>();
+
         // Activate the player if this is the starting point of the level
         if (activated)
         {
             player.SetActive(true);
+            renderer.material = activatedMat; // set new material
         }
     }
 
@@ -52,6 +59,7 @@ public class CloningDevice : MonoBehaviour
     {
         // Activate the new player body and restart all clones
         activated = true;
+        renderer.material = activatedMat;
         TimeRecorder.globalReplay(); // needs to be done before the new player activates to ensure the new player records instead of replaying
         player.SetActive(true);
     }

@@ -111,6 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activated: 0
   player: {fileID: 8303727053230809281}
+  activatedMat: {fileID: 2100000, guid: 8687ca9ef6263ae499fbe60d231ef4e6, type: 2}
 --- !u!1001 &7994728340084098383
 PrefabInstance:
   m_ObjectHideFlags: 0
