@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelTextbox: {fileID: 2079304929}
   livesTextbox: {fileID: 1353580553}
-  keysTextbox: {fileID: 1891729821}
+  resetTextbox: {fileID: 1891729821}
 --- !u!114 &98199047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 1891729822}
   - component: {fileID: 1891729821}
   m_Layer: 5
-  m_Name: Keys_txt
+  m_Name: Reset_txt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Keys: '
+  m_Text: 'Reset Counter: '
 --- !u!222 &1891729822
 CanvasRenderer:
   m_ObjectHideFlags: 0

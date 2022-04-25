@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
     static public int lives; // number of lives for player 
     public int Lives { get { return lives; } set { lives = value; } }//access to static variable lives [get/set methods]
 
-    static public int key;  //key value
-    public int Key { get { return key; } set { key = value; } }//access to static variable key [get/set methods]
+    static public int reset;  //key value
+    public int Reset { get { return reset; } set { reset = value; } }//access to static variable key [get/set methods]
 
     [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Playing:
-                UpdateKey();
+                Updatereset();
                 if (PlayerController.dead) { PlayerController.dead = false;  LostLife(); }
                 if (Goal.goalMet) { Goal.goalMet = false; NextLevel();}
                 break;
@@ -249,15 +249,15 @@ public class GameManager : MonoBehaviour
 
     }//end NextLevel()
 
-    public void UpdateKey(int point = 0)
+    public void Updatereset(int point = 0)
     { //This method manages the score on update. 
 
-        if (Goal.goalMet)
+        if (PlayerController.dead)
         {
             point++;
         }
-        key += point;
-        PlayerPrefs.SetInt("Keys:", key); //set the playerPref for the high score
+        reset += point;
+        PlayerPrefs.SetInt("Reset Counter:", reset); //set the playerPref for the high score
 
     }//end CheckScore()
 
