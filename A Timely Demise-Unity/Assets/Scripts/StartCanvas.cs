@@ -32,6 +32,11 @@ public class StartCanvas : MonoBehaviour
 
     }
 
+    public void GameContinue()
+    {
+        gm.LoadGame(); // reference the LoadGame method on the game manager
+    }
+
     public void GameExit()
     {
         gm.ExitGame(); //refenece the ExitGame method on the game manager
