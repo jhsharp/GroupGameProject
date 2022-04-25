@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
             if (!hasJumped) hasJumped = jumpInput; // used for time recorder
 
             // restart if R is pressed
-            if (Input.GetKey(KeyCode.R)) { dead = true; gameMan.GetComponent<AudioSource>().PlayOneShot(deathSound); gameMan.RestartLevel(); }
+            if (Input.GetKeyDown(KeyCode.R)) { dead = true; gameMan.GetComponent<AudioSource>().PlayOneShot(deathSound); gameMan.RestartLevel(); }
         }
     }
 
