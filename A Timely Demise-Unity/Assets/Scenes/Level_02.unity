@@ -976,6 +976,7 @@ MonoBehaviour:
   - Level_00
   - Level_01
   - Level_02
+  - Level_03
   gameLevelsCount: 0
   levelLost: 0
   nextLevel: 0
