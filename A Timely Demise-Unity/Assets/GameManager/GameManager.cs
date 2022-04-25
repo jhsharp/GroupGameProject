@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //if ESC is pressed , exit game
-        if (Input.GetKey("escape")) { ExitGame(); }
+        if (Input.GetKey("escape")) { BackMain(); }
 
         //check for game state changes
         CheckGameState();
@@ -203,8 +203,16 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+        SceneManager.LoadScene(startScene);
+        SetGameState(GameState.Title);
         Debug.Log("Exited Game");
     }//end ExitGame()
+
+    public void BackMain()
+    {
+        SceneManager.LoadScene(startScene);
+        SetGameState(GameState.Title);
+    }//Back to Main()
 
 
     //GO TO THE GAME OVER SCENE
