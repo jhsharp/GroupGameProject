@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
         loadLevel = gameLevelsCount - 1; //the level from the array
 
         //load first game level
+        PlayerPrefs.SetInt("Current Level", gameLevelsCount); // update save data
         SceneManager.LoadScene(gameLevels[loadLevel]);
 
         SetDefaultGameStats(); // the game stats defaults 
