@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
     static public int lives; // number of lives for player 
     public int Lives { get { return lives; } set { lives = value; } }//access to static variable lives [get/set methods]
 
-    static public int score;  //score value
-    public int Score { get { return score; } set { score = value; } }//access to static variable score [get/set methods]
+    static public int key;  //key value
+    public int Key { get { return key; } set { key = value; } }//access to static variable key [get/set methods]
 
     [Space(10)]
     public string defaultEndMessage = "Game Over";//the end screen message, depends on winning outcome
@@ -138,6 +138,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Playing:
+                UpdateKey();
+                if (PlayerController.dead) { PlayerController.dead = false;  LostLife(); }
                 if (Goal.goalMet) { Goal.goalMet = false; NextLevel();}
                 break;
 
@@ -234,6 +236,17 @@ public class GameManager : MonoBehaviour
 
     }//end NextLevel()
 
+    public void UpdateKey(int point = 0)
+    { //This method manages the score on update. 
+
+        if (Goal.goalMet)
+        {
+            point++;
+        }
+        key += point;
+        PlayerPrefs.SetInt("Keys:", key); //set the playerPref for the high score
+
+    }//end CheckScore()
 
     //PLAYER LOST A LIFE
     public void LostLife()
@@ -249,8 +262,6 @@ public class GameManager : MonoBehaviour
 
             //if this level resets when life is lost
             numberOfLives = lives; //set lives left for level reset
-            SceneManager.LoadScene(gameLevels[loadLevel]); //restart the level
-            //end if (resetLostLevel)
 
         } // end elseif
     }//end LostLife()
