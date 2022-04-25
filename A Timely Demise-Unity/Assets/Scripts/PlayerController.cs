@@ -14,6 +14,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    static public bool dead = false;
     // references to components
     private Rigidbody rb;
     private Collider col;
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
             if (!hasJumped) hasJumped = jumpInput; // used for time recorder
 
             // restart if R is pressed
-            if (Input.GetKey(KeyCode.R)) gameMan.RestartLevel();
+            if (Input.GetKey(KeyCode.R)) { dead = true; gameMan.RestartLevel(); }
         }
     }
 
@@ -153,7 +154,10 @@ public class PlayerController : MonoBehaviour
     private void checkBounds()
     {
         // restart the room when the player falls off the level
-        if (transform.position.y < lowerBound) gameMan.RestartLevel();
+        if (transform.position.y < lowerBound)
+        {
+            dead = true; gameMan.RestartLevel();
+        }
     }
 
     public void takeDamage(int damage)

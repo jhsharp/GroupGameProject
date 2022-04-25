@@ -1216,6 +1216,8 @@ MonoBehaviour:
   - Level_01
   - Level_02
   - Level_03
+  - Level_04
+  - Level_05
   gameLevelsCount: 0
   levelLost: 0
   nextLevel: 0
