@@ -2,8 +2,8 @@
  * Created by: Ruoyu Zhang
  * Date Created: April 24, 2022
  * 
- * Last Edited by: April 24,2022
- * Last Edited: April 24, 2022
+ * Last Edited by: Jacob Sharp
+ * Last Edited: April 25, 2022
  * 
  * Description: GameManager
 ****/
@@ -83,6 +83,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] //Access to private variables in editor
     private bool playerWon = false;
 
+    // Get GameObject with music source
+    public GameObject musicPlayer;
+
 
     /*** MEHTODS ***/
 
@@ -108,7 +111,11 @@ public class GameManager : MonoBehaviour
         CheckGameState();
 
         //Outpot game state
-        Debug.Log("Game State " + gameState);
+        //Debug.Log("Game State " + gameState);
+
+        // Play proper music
+        if (SceneManager.GetActiveScene().name.Contains("Level")) musicPlayer.SetActive(true);
+        else musicPlayer.SetActive(false);
 
     }//end Update
 
