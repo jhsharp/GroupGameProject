@@ -22,13 +22,16 @@ public class CloningDevice : MonoBehaviour
     [Tooltip("Make sure this player is set to inactive in the editor")]
     public GameObject player; // reference to the player associated with this device
     public Material activatedMat;
+    public AudioClip activateSound;
 
     private Renderer renderer;
+    private AudioSource audio;
 
     void Start()
     {
-        // Get a reference to the renderer
+        // Get references
         renderer = GetComponent<Renderer>();
+        audio = GetComponent<AudioSource>();
 
         // Activate the player if this is the starting point of the level
         if (activated)
@@ -60,6 +63,7 @@ public class CloningDevice : MonoBehaviour
         // Activate the new player body and restart all clones
         activated = true;
         renderer.material = activatedMat;
+        audio.PlayOneShot(activateSound);
         TimeRecorder.globalReplay(); // needs to be done before the new player activates to ensure the new player records instead of replaying
         player.SetActive(true);
     }

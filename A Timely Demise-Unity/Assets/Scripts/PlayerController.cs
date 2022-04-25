@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Collider col;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audio;
     private TimeRecorder recorder;
     public LayerMask ground;
 
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int health; // player health
 
+    // assign sound effects
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
+
     private GameManager gameMan;
 
 
@@ -51,6 +56,7 @@ public class PlayerController : MonoBehaviour
         col = GetComponent<Collider>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audio = GetComponent<AudioSource>();
         recorder = GetComponent<TimeRecorder>();
 
         gameMan = FindObjectOfType<GameManager>();
@@ -71,7 +77,7 @@ public class PlayerController : MonoBehaviour
             if (!hasJumped) hasJumped = jumpInput; // used for time recorder
 
             // restart if R is pressed
-            if (Input.GetKey(KeyCode.R)) { dead = true; gameMan.RestartLevel(); }
+            if (Input.GetKey(KeyCode.R)) { dead = true; gameMan.GetComponent<AudioSource>().PlayOneShot(deathSound); gameMan.RestartLevel(); }
         }
     }
 
@@ -123,6 +129,7 @@ public class PlayerController : MonoBehaviour
         if (jumpInput && isGrounded() && !deathActive)
         {
             jumpInput = false;
+            audio.PlayOneShot(jumpSound);
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
             // animator.SetTrigger("Jump");
         }
@@ -156,6 +163,7 @@ public class PlayerController : MonoBehaviour
         // restart the room when the player falls off the level
         if (transform.position.y < lowerBound)
         {
+            gameMan.GetComponent<AudioSource>().PlayOneShot(deathSound);
             dead = true; gameMan.RestartLevel();
         }
     }
@@ -182,6 +190,7 @@ public class PlayerController : MonoBehaviour
         if (deathActive)
         {
             if (deathDelayTimer > 0) deathDelayTimer -= Time.fixedDeltaTime;
+            gameMan.GetComponent<AudioSource>().PlayOneShot(deathSound);
             gameMan.RestartLevel();
         }
     }
