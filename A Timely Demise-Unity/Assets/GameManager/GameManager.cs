@@ -49,14 +49,6 @@ public class GameManager : MonoBehaviour
 
     [Space(10)]
 
-    //static vairables can not be updated in the inspector, however private serialized fileds can be
-    [SerializeField] //Access to private variables in editor
-    private int numberOfLives; //set number of lives in the inspector
-    [Tooltip("Does the level get reset when a life is lost")]
-    public bool resetLostLevel = true; //reset the lost level
-    static public int lives; // number of lives for player 
-    public int Lives { get { return lives; } set { lives = value; } }//access to static variable lives [get/set methods]
-
     static public int reset;  //key value
     public int Reset { get { return reset; } set { reset = value; } }//access to static variable key [get/set methods]
 
@@ -139,7 +131,6 @@ public class GameManager : MonoBehaviour
 
             case GameState.Playing:
                 Updatereset();
-                if (PlayerController.dead) { PlayerController.dead = false;  LostLife(); }
                 if (Goal.goalMet) { Goal.goalMet = false; NextLevel();}
                 break;
 
@@ -197,7 +188,6 @@ public class GameManager : MonoBehaviour
 
 
         //SET ALL GAME LEVEL VARIABLES FOR START OF GAME
-        lives = numberOfLives; //set the number of lives
 
 
         endMsg = defaultEndMessage; //set the end message default
@@ -255,29 +245,13 @@ public class GameManager : MonoBehaviour
         if (PlayerController.dead)
         {
             point++;
+            PlayerController.dead = false;
         }
         reset += point;
         PlayerPrefs.SetInt("Reset Counter:", reset); //set the playerPref for the high score
 
     }//end CheckScore()
 
-    //PLAYER LOST A LIFE
-    public void LostLife()
-    {
-        if (lives == 1) //if there is one life left and it is lost
-        {
-            GameOver(); //game is over
-
-        }
-        else
-        {
-            lives--; //subtract from lives reset level lost 
-
-            //if this level resets when life is lost
-            numberOfLives = lives; //set lives left for level reset
-
-        } // end elseif
-    }//end LostLife()
 
     // Restart the current level
     public void RestartLevel()
