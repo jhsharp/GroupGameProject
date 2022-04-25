@@ -22,13 +22,13 @@ public class Canvasingame : MonoBehaviour
     [Header("Canvas SETTINGS")]
     public Text levelTextbox; //textbox for level count
     public Text livesTextbox; //textbox for the lives
-    public Text keysTextbox; //textbox for the keys
+    public Text resetTextbox; //textbox for the keys
 
     //GM Data
     private int level;
     private int totalLevels;
     private int lives;
-    private int keys;
+    private int reset;
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class Canvasingame : MonoBehaviour
     void GetGameStats()
     {
         lives = gm.Lives;
-        keys = gm.Key;
+        reset = gm.Reset;
     }
 
     void SetHUD()
@@ -59,7 +59,7 @@ public class Canvasingame : MonoBehaviour
         //if texbox exsists update value
         if (levelTextbox) { levelTextbox.text = "Level: " + level + "/" + totalLevels; }
         if (livesTextbox) { livesTextbox.text = "Lives: " + lives; }
-        if (keysTextbox) { keysTextbox.text = "Keys: " + keys; }
+        if (resetTextbox) { resetTextbox.text = "Reset Counter: " + reset; }
 
     }//end SetHUD()
 }

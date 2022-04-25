@@ -733,7 +733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   numberOfLives: 3
-  resetLostLevel: 0
+  resetLostLevel: 1
   defaultEndMessage: Game Over
   endMsg: 
   startScene: start_scene
