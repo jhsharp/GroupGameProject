@@ -3,7 +3,7 @@
  * Date Created: April 18, 2022
  * 
  * Last Edited By: Jacob Sharp
- * Date Last Edited: April 18, 2022
+ * Date Last Edited: April 24, 2022
  * 
  * Description: Manage player movement/interactions
  ****/
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveChange;
     [SerializeField] private float moveSpeed, jumpSpeed;
     public bool currentlyGrounded;
+    public int lowerBound = -40;
 
     // variables for managing death
     [SerializeField] private float deathDelay;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int health; // player health
 
-    // public GameManager gameMan;
+    private GameManager gameMan;
 
 
     private void Awake()
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         recorder = GetComponent<TimeRecorder>();
 
-        // gameMan = FindObjectOfType<GameManager>();
+        gameMan = FindObjectOfType<GameManager>();
     }
 
     void Start()
@@ -67,6 +68,9 @@ public class PlayerController : MonoBehaviour
             moveInput = Input.GetAxis("Horizontal");
             if (!jumpInput) jumpInput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space);
             if (!hasJumped) hasJumped = jumpInput; // used for time recorder
+
+            // restart if R is pressed
+            if (Input.GetKey(KeyCode.R)) gameMan.RestartLevel();
         }
     }
 
@@ -77,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             move();
             jump();
+            checkBounds();
         }
 
         // check to see if the player is dead/dying
@@ -145,6 +150,12 @@ public class PlayerController : MonoBehaviour
         return Physics2D.OverlapArea(topLeft, bottomRight, ground);
     }
 
+    private void checkBounds()
+    {
+        // restart the room when the player falls off the level
+        if (transform.position.y < lowerBound) gameMan.RestartLevel();
+    }
+
     public void takeDamage(int damage)
     {
         // reduce health
@@ -167,7 +178,7 @@ public class PlayerController : MonoBehaviour
         if (deathActive)
         {
             if (deathDelayTimer > 0) deathDelayTimer -= Time.fixedDeltaTime;
-            else Debug.Log("ADD ROOM RESET ON DEATH"); // gameMan.loadScene(SceneManager.GetActiveScene().name);
+            gameMan.RestartLevel();
         }
     }
 }

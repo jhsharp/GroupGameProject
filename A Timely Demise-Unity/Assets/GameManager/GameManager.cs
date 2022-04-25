@@ -254,4 +254,10 @@ public class GameManager : MonoBehaviour
 
         } // end elseif
     }//end LostLife()
+
+    // Restart the current level
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }
