@@ -28,6 +28,14 @@ public class Canvasingame : MonoBehaviour
     private int totalLevels;
     private int reset;
 
+    public GameManager GameManager
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void Start()
     {
         gm = GameManager.GM; //find the game manager

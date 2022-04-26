@@ -23,6 +23,14 @@ public class Button : MonoBehaviour
     public GameObject connectedDoor; //the door associated with this button.
     private Door unlockMech;
 
+    public Door Door
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
