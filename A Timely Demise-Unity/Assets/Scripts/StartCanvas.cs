@@ -19,6 +19,14 @@ public class StartCanvas : MonoBehaviour
 
     GameManager gm; //reference to game manager
 
+    public GameManager GameManager
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     /*** MEHTODS ***/
 
     private void Start()

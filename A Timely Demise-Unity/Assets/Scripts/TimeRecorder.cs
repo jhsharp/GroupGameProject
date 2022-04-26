@@ -42,6 +42,13 @@ public class TimeRecorder : MonoBehaviour
     private SpriteRenderer renderer;
     private PlayerController player;
 
+    public PlayerController PlayerController
+    {
+        get => default;
+        set
+        {
+        }
+    }
 
     private void Start()
     {

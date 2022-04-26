@@ -16,6 +16,14 @@ public class EndCanvas : MonoBehaviour
 {
     GameManager gm; //reference to game manager
 
+    public GameManager GameManager
+    {
+        get => default;
+        set
+        {
+        }
+    }
+
     private void Start()
     {
         gm = GameManager.GM; //find the game manager

@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="All the items under the canvas programs require a player to function">
+    <Position X="6.833" Y="2.552" Height="0.641" Width="1.7" />
+  </Comment>
+  <Class Name="Button" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <AssociationLine Name="Door" Type="Door" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="4.346" />
+        <Point X="2.375" Y="4.346" />
+        <Point X="2.375" Y="5.125" />
+        <Point X="3.5" Y="5.125" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAKgAACgAAAAAAAAAAAAAAAQAAAAMAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Button.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Door" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Canvasingame" Collapsed="true">
+    <Position X="0.5" Y="2.25" Width="1.5" />
+    <AssociationLine Name="GameManager" Type="GameManager" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.188" Y="2.25" />
+        <Point X="1.188" Y="0.846" />
+        <Point X="2" Y="0.846" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEACEAQEAAAAAAEAIAAAEAAAAAgAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Canvasingame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Goal" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Goal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Lever" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <AssociationLine Name="Door" Type="Door" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2" Y="5.191" />
+        <Point X="2.25" Y="5.191" />
+        <Point X="2.25" Y="5.5" />
+        <Point X="3.5" Y="5.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAKgAASgAACAAAAAAAABAAAAAAAAIAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Lever.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Door" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Door">
+    <Position X="3.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACCAAAAAAAAAAAAAAAAAABAAAAQAACgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Door.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="8" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAQSAABAEiEQLSCEAAgAAQgRAAiACACICAACIAAAAEg=</HashCode>
+      <FileName>Assets\Scripts\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StartCanvas" Collapsed="true">
+    <Position X="2" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAACACACAEAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\StartCanvas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EndCanvas" Collapsed="true">
+    <Position X="3.5" Y="2.25" Width="1.5" />
+    <AssociationLine Name="GameManager" Type="GameManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.25" Y="2.25" />
+        <Point X="4.25" Y="0.875" />
+        <Point X="3.5" Y="0.875" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAASACAAAEAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\EndCanvas.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAiQwEEEAAFUAAAQSAAAAgAQggAAAIAAAgAAAkAEE=</HashCode>
+      <FileName>Assets\GameManager\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CloningDevice" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAQAAAAAQAABAAAAAAABQAAAAAAAiAA=</HashCode>
+      <FileName>Assets\Scripts\CloningDevice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeRecorder" Collapsed="true">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQCAgAQEiQAAAAEQAgAQBwEAAAAAEABAAAAAAAAoCA=</HashCode>
+      <FileName>Assets\Scripts\TimeRecorder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PlayerController" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="GameState" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgABAAAAAAEAAAAAABAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\GameManager\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
